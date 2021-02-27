@@ -30,7 +30,7 @@ const EnhancedNotifyTimer: FC = () => {
     if (upcomingTalk.length) {
       upcomingTalk.forEach((talk) => {
         if (!(talk.id in _notifiedTalk)) {
-          Push.create(`${upcomingTalk[0].title}がまもなく始まります`, {
+          Push.create(`「${talk.title}」がまもなく始まります`, {
             timeout: 5000,
           }).catch((e) => console.error(e));
 
