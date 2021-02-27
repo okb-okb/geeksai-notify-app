@@ -10,11 +10,12 @@ import {
 
 import DeleteButton from '../../containers/atoms/DeleteButton';
 import type { Talk } from '../../data/dummy-data';
+import './Notify.css';
 
 const useStyles = makeStyles(() =>
   createStyles({
     table: {
-      maxWidth: 500,
+      maxWidth: 1000,
     },
   }),
 );
@@ -50,10 +51,18 @@ const Notify: FC<Props> = ({ notices = {} }) => {
         <Table className={classes.table} aria-label="table">
           <TableBody>
             <TableRow key="header">
-              <TableCell>タイトル</TableCell>
-              <TableCell>講演者</TableCell>
-              <TableCell>時間</TableCell>
-              <TableCell>削除</TableCell>
+              <TableCell>
+                <span className="itemTitleText">タイトル</span>
+              </TableCell>
+              <TableCell>
+                <span className="itemTitleText">講演者</span>
+              </TableCell>
+              <TableCell>
+                <span className="itemTitleText">時間</span>
+              </TableCell>
+              <TableCell>
+                <span className="itemTitleText">削除</span>
+              </TableCell>
             </TableRow>
             {result}
           </TableBody>

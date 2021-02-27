@@ -34,7 +34,7 @@ const useStyles = makeStyles(() =>
       minWidth: 120,
     },
     table: {
-      maxWidth: 500,
+      maxWidth: 600,
     },
     large: {
       fontSize: 'large',

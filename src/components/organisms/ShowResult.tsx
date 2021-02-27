@@ -1,6 +1,8 @@
 import { FC } from 'react';
+
 import SwitchingButton from '../../containers/molecules/SwitchingButton';
 import type { Talk } from '../../data/dummy-data';
+import './ShowResult.css';
 
 type Props = {
   talks: Talk[];
@@ -11,19 +13,25 @@ const ShowResult: FC<Props> = ({ talks = [] }) => {
     const time = new Date(talk.time);
 
     return (
-      <span key={talk.id}>
-        <div>タイトル {talk.title}</div>
-        <div>講演者 {talk.speaker}</div>
-        <div>
-          時間 {time.getMonth() + 1}月 {time.getDate()}日 {time.getHours()}時{' '}
-          {time.getMinutes()}分
+      <div key={talk.id} className="talkBlock">
+        <div className="itemBlock">
+          <div className="itemTitleText"> タイトル</div> {talk.title}
         </div>
-        <div>内容 {talk.content}</div>
+        <div className="itemBlock">
+          <div className="itemTitleText">講演者</div>
+          {talk.speaker}
+        </div>
+        <div className="itemBlock">
+          <div className="itemTitleText">時間</div> {time.getMonth() + 1}月{' '}
+          {time.getDate()}日 {time.getHours()}時 {time.getMinutes()}分
+        </div>
+        <div className="itemBlock">
+          <div className="itemTitleText">内容</div> {talk.content}
+        </div>
         <div>
           <SwitchingButton talk={talk} />
         </div>
-        <br />
-      </span>
+      </div>
     );
   });
 

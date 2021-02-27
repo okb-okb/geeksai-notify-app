@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Route, Switch } from 'react-router';
-import './App.css';
 
 import Notify from './containers/pages/Notify';
 import RecommendTalk from './containers/pages/RecommendTalk';
@@ -11,7 +10,7 @@ import NotifyTimer from './containers/pages/NotifyTimer';
 
 const App: FC = () => (
   <div>
-    <span className="Menu">
+    <span>
       <MenuBar />
     </span>
     <NotifyTimer />
