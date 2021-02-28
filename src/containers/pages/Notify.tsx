@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { NoticeState } from '../../features/manageNotice';
@@ -9,6 +9,13 @@ const EnhancedNotify: FC = () => {
   const notices = useSelector<NoticeState, { [id: string]: Talk }>(
     (state) => state.noticeList,
   );
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      'GEEKSAI_NOTIFICATION_LIST',
+      JSON.stringify(notices),
+    );
+  }, [notices]);
 
   return <Notify notices={notices} />;
 };

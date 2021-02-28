@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { noticeSlice } from '../../features/manageNotice';
+import { noticeSlice, NoticeState } from '../../features/manageNotice';
 import DeleteButton from '../../components/atoms/DeleteButton';
 import type { Talk } from '../../data/dummy-data';
 
@@ -22,13 +22,22 @@ const EnhancedDeleteButton: FC<Props> = ({
   },
 }) => {
   const dispatch = useDispatch();
-
-  return (
-    <DeleteButton
-      talk={talk}
-      deleteTalk={(t: Talk) => dispatch(noticeSlice.actions.deletedTalk(t))}
-    />
+  const notices = useSelector<NoticeState, { [id: string]: Talk }>(
+    (state) => state.noticeList,
   );
+
+  const deleteTalk = (t: Talk) => {
+    dispatch(noticeSlice.actions.deletedTalk(t));
+  };
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      'GEEKSAI_NOTIFICATION_LIST',
+      JSON.stringify(notices),
+    );
+  }, [notices]);
+
+  return <DeleteButton talk={talk} deleteTalk={(t: Talk) => deleteTalk(t)} />;
 };
 
 export default EnhancedDeleteButton;

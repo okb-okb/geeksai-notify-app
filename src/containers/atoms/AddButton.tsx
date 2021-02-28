@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { noticeSlice } from '../../features/manageNotice';
+import { noticeSlice, NoticeState } from '../../features/manageNotice';
 import AddButton from '../../components/atoms/AddButton';
 import type { Talk } from '../../data/dummy-data';
 
@@ -22,13 +22,22 @@ const EnhancedAddButton: FC<Props> = ({
   },
 }) => {
   const dispatch = useDispatch();
-
-  return (
-    <AddButton
-      talk={talk}
-      addTalk={(t: Talk) => dispatch(noticeSlice.actions.addedTalk(t))}
-    />
+  const notices = useSelector<NoticeState, { [id: string]: Talk }>(
+    (state) => state.noticeList,
   );
+
+  const addTalk = (t: Talk) => {
+    dispatch(noticeSlice.actions.addedTalk(t));
+  };
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      'GEEKSAI_NOTIFICATION_LIST',
+      JSON.stringify(notices),
+    );
+  }, [notices]);
+
+  return <AddButton talk={talk} addTalk={(t: Talk) => addTalk(t)} />;
 };
 
 export default EnhancedAddButton;

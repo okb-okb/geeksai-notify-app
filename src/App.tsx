@@ -7,6 +7,7 @@ import SearchTalk from './containers/pages/SearchTalk';
 import MenuBar from './components/pages/MenuBar';
 import NotFound from './components/pages/NotFound';
 import NotifyTimer from './containers/pages/NotifyTimer';
+import HandleStorage from './containers/pages/HandleStorage';
 
 const App: FC = () => (
   <div>
@@ -14,6 +15,7 @@ const App: FC = () => (
       <MenuBar />
     </span>
     <NotifyTimer />
+    <HandleStorage />
     <br />
     <Switch>
       <Route exact path="/">
