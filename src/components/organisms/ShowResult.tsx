@@ -35,6 +35,9 @@ const ShowResult: FC<Props> = ({ talks = [] }) => {
     );
   });
 
+  if (talks.length === 0)
+    return <div className="talkBlock">検索結果がありません</div>;
+
   return <>{result}</>;
 };
 
